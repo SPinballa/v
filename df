@@ -1,0 +1,22 @@
+import requests
+import time
+
+poll_url = "https://docs.google.com/forms/d/e/1FAIpQLSeW4WLmg3JwpeuWuUAU_ZSlTm6ciNuYXtz_QgFBuln18y_h_A/viewform?usp=sf_link"
+poll_data = {
+    "question_id": "12345",
+    "answer": "Horizon (7-1) at Cactus Shadows (6-3)"
+}
+
+def submit_poll():
+    try:
+        response = requests.post(poll_url, json=poll_data)
+        if response.status_code == 200:
+            print("Poll submitted successfully!")
+        else:
+            print(f"Failed to submit poll: {response.status_code}, {response.text}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+while True:
+    submit_poll()
+    time.sleep(10)
